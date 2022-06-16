@@ -72,7 +72,8 @@ class ControlProcesses:
                 if self._verification_criteria(proc):
 #                    print(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())),end='')
 #                    print("dwm kill, memory %d Byte" %(proc.memory_info().vms))
-                    logger.debug("dwm memory %d MB, KILL" %(proc.memory_info().vms / 1024 / 1024))
+                    logger.debug("dwm memory %d MB, KILL" %(proc.memory_info().rss / 1024 / 1024))
+                    #vms，进程使用的虚拟内存；rss，进程使用实际物理内存
                     proc.kill()
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
                 pass
@@ -84,5 +85,5 @@ class ControlProcesses:
 if __name__ == "__main__":
     process_for_controlled = ProcessCriteria()
     process_for_controlled.name = "dwm.exe"
-    process_for_controlled.max_vms_mb = 1024
+    process_for_controlled.max_vms_mb = 2048
     controller = ControlProcesses(process_for_controlled)
