@@ -2,10 +2,12 @@ from ModuleControlProcess import ProcessCriteria, ControlProcesses
 from time import sleep
 #from loguru import logger
 #logger.add("log_Control_dwm.txt", format="{time} {level} {message}", level="INFO", encoding="utf-8")
+from deletelog import deleteLogger
 
-
+            
 if __name__ == "__main__":
 #    try:
+    deleteLogger()
     process_for_controlled = ProcessCriteria()
     process_for_controlled.name = "dwm.exe"
     process_for_controlled.max_vms_mb = 2048
